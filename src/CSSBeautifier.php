@@ -1,12 +1,12 @@
 <?php
 
-namespace phil404\beautifulcss;
+namespace shopping24\cssbeautifier;
 
 
-class beautifulcss
+class CSSBeautifier
 {
 
-    public static function makeCssBeautifulAgain($string){
+    public static function run($string){
         $tap = "    ";
 
         $beautifulCssWithoutTaps = preg_replace("(})", "\n$0", preg_replace("([{;}])", "$0\n", $string));

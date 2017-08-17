@@ -1,10 +1,10 @@
 <?php
 
-namespace phil404\beautifulcss;
+namespace shopping24\cssbeautifier;
 
 use Illuminate\Support\ServiceProvider;
 
-class beautifulCssServiceProvider extends ServiceProvider
+class CSSBeautifierServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -23,8 +23,8 @@ class beautifulCssServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app['beautifulcss'] = $this->app->share(function($app) {
-            return new beautifulcss;
+        $this->app['cssbeautifier'] = $this->app->share(function($app) {
+            return new cssbeautifier;
         });
     }
 }
