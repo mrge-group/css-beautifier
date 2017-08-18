@@ -2,3 +2,7 @@ language: php
 php:
   - '7.0'
   - '7.1'
+install:
+  - composer install
+script:
+ - vendor/bin/phpcs --colors --severity=1 --standard=PSR2
