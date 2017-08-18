@@ -9,7 +9,7 @@ class CSSBeautifier
     public static function run($string){
         $tap = "    ";
 
-        $beautifulCssWithoutTaps = preg_replace("(})", "\n$0", preg_replace("([{;}])", "$0\n", $string));
+        $beautifulCssWithoutTaps = self::random($string);
 
         $beautifulCss = "";
 
@@ -60,6 +60,10 @@ class CSSBeautifier
         }
         return $beautifulCss;
 
+    }
+
+    private static function random($ugly){
+        return preg_replace("(})", "\n$0", preg_replace("([{;}])", "$0\n", $ugly));
     }
 
 }
