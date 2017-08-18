@@ -6,3 +6,4 @@ install:
   - composer install
 script:
  - vendor/bin/phpcs --colors --severity=1 --standard=PSR2 src/
+ - phpunit
