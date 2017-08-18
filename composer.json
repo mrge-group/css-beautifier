@@ -14,5 +14,10 @@
             "email": "robert.braatz@s24.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Shopping24\\CSSBeautifier\\": "src/",
+        }
+    },
     "require": {}
 }

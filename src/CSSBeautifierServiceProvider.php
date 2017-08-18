@@ -1,6 +1,6 @@
 <?php
 
-namespace shopping24\cssbeautifier;
+namespace Shopping24\CSSBeautifier;
 
 use Illuminate\Support\ServiceProvider;
 
