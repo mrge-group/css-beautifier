@@ -16,7 +16,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Shopping24\\CSSBeautifier\\": "src/",
+            "Shopping24\\CSSBeautifier\\": "src/"
         }
     },
     "require": {}
