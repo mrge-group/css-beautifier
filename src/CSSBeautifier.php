@@ -2,63 +2,48 @@
 
 namespace Shopping24\CSSBeautifier;
 
-
 class CSSBeautifier
 {
     public static function run($string)
     {
         $tap = "    ";
         $beautifiedArray = [];
-
         $tag = false;
         $media = false;
         foreach (self::stringToArray($string) as $key => $line) {
             $beautifulCss = "";
             if (preg_match('({)', $line)) {
-
-                if ($media === true) $beautifulCss .= $tap;
+                if ($media === true){
+                    $beautifulCss .= $tap;
+                }
                 if (preg_match('(@)', $line)) {
-
                     $media = true;
-
                 } else {
-
                     $tag = true;
-
                 }
                 $beautifulCss .= $line;
-
             } elseif (preg_match('(})', $line)) {
-
                 if ($tag === true) {
-
                     $tag = false;
                     if ($media === true) {
-
                         $beautifulCss .= $tap;
-
                     }
-
                 } else {
-
                     $media = false;
-
                 }
                 $beautifulCss .= $line;
-
             } else {
-
-                if ($media === true) $beautifulCss .= $tap;
-                if ($tag === true) $beautifulCss .= $tap;
+                if ($media === true){
+                    $beautifulCss .= $tap;
+                }
+                if ($tag === true){
+                    $beautifulCss .= $tap;
+                }
                 $beautifulCss .= $line;
-
             }
-
             $beautifiedArray[$key] = $beautifulCss;
-
         }
         return self::arrayToString($beautifiedArray);
-
     }
 
     /*
@@ -98,14 +83,12 @@ class CSSBeautifier
     {
         $string = "";
         foreach ($array as $key => $line) {
-
             if (strlen(preg_replace("( )", "", $line)) != 0) {
-
-                if ($key != 0) $string .= "\n";
+                if ($key != 0){
+                    $string .= "\n";
+                }
                 $string .= $line;
-
             }
-
         }
         return $string;
     }
