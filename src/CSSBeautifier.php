@@ -8,12 +8,13 @@ class CSSBeautifier
     {
         $tap = "    ";
         $beautifiedArray = [];
+
         $tag = false;
         $media = false;
         foreach (self::stringToArray($string) as $key => $line) {
             $beautifulCss = "";
             if (preg_match('({)', $line)) {
-                if ($media === true){
+                if ($media === true) {
                     $beautifulCss .= $tap;
                 }
                 if (preg_match('(@)', $line)) {
@@ -33,10 +34,10 @@ class CSSBeautifier
                 }
                 $beautifulCss .= $line;
             } else {
-                if ($media === true){
+                if ($media === true) {
                     $beautifulCss .= $tap;
                 }
-                if ($tag === true){
+                if ($tag === true) {
                     $beautifulCss .= $tap;
                 }
                 $beautifulCss .= $line;
@@ -45,6 +46,7 @@ class CSSBeautifier
         }
         return self::arrayToString($beautifiedArray);
     }
+
 
     /*
      * This function will add "new Lines" after every "{;}".
@@ -84,7 +86,7 @@ class CSSBeautifier
         $string = "";
         foreach ($array as $key => $line) {
             if (strlen(preg_replace("( )", "", $line)) != 0) {
-                if ($key != 0){
+                if ($key != 0) {
                     $string .= "\n";
                 }
                 $string .= $line;
@@ -92,5 +94,4 @@ class CSSBeautifier
         }
         return $string;
     }
-
 }
