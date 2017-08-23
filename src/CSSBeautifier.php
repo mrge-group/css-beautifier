@@ -8,7 +8,6 @@ class CSSBeautifier
     public static function run($string)
     {
         $tap = "    ";
-
         $beautifiedArray = [];
 
         $tag = false;
