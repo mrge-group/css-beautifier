@@ -4,45 +4,34 @@ namespace Shopping24\CSSBeautifier;
 
 class CSSBeautifier
 {
+    const TAP = "    ";
+
     public static function run($string)
     {
-        $tap = "    ";
         $beautifiedArray = [];
 
         $tag = false;
         $media = false;
         foreach (self::stringToArray($string) as $key => $line) {
-            $beautifulCss = "";
+            $line = trim($line);
             if (preg_match('({)', $line)) {
-                if ($media === true) {
-                    $beautifulCss .= $tap;
-                }
+                $line = self::createTaps($line, $tag, $media);
                 if (preg_match('(@)', $line)) {
                     $media = true;
                 } else {
                     $tag = true;
                 }
-                $beautifulCss .= $line;
             } elseif (preg_match('(})', $line)) {
                 if ($tag === true) {
                     $tag = false;
-                    if ($media === true) {
-                        $beautifulCss .= $tap;
-                    }
                 } else {
                     $media = false;
                 }
-                $beautifulCss .= $line;
+                $line = self::createTaps($line, $tag, $media);
             } else {
-                if ($media === true) {
-                    $beautifulCss .= $tap;
-                }
-                if ($tag === true) {
-                    $beautifulCss .= $tap;
-                }
-                $beautifulCss .= $line;
+                $line = self::createTaps($line, $tag, $media);
             }
-            $beautifiedArray[$key] = $beautifulCss;
+            $beautifiedArray[$key] = self::checkHealthyAttribute($line);
         }
         return self::arrayToString($beautifiedArray);
     }
@@ -77,11 +66,11 @@ class CSSBeautifier
      * This function convert an array to a string.
      * Each item in the array is a new line in the string.
      *
-     * @param Array     $array      The array to convert
+     * @param array $array The array to convert
      *
-     * @return String   $string     The converted string
+     * @return string $string The converted string
      */
-    private static function arrayToString($array)
+    private static function arrayToString(array $array)
     {
         $string = "";
         foreach ($array as $key => $line) {
@@ -91,6 +80,31 @@ class CSSBeautifier
                 }
                 $string .= $line;
             }
+        }
+        return $string;
+    }
+
+    /*
+     *
+     */
+    private static function checkHealthyAttribute(string $string)
+    {
+        if (preg_match("([{;}])", $string) == false && preg_match("(:)", $string) == true) {
+            $string .= ";";
+        }
+        return $string;
+    }
+
+    /*
+     *
+     */
+    private static function createTaps(string $string, bool $tag, bool $media)
+    {
+        if ($tag == true) {
+            $string = self::TAP . $string;
+        }
+        if ($media == true) {
+            $string = self::TAP . $string;
         }
         return $string;
     }
