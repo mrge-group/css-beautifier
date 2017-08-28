@@ -22,12 +22,11 @@ class CSSBeautifier
 
             switch (true) {
                 case preg_match('/@/', $line):
-                    $line = preg_replace('/{/', ' {', $line);
+                    $line = self::checkHealthyWhiteSpaces($line);
                     self::$media = true;
                     break;
                 case preg_match('/{/', $line):
-                    $line = self::createTaps($line);
-                    $line = preg_replace('/{/', ' {', $line);
+                    $line = self::checkHealthyWhiteSpaces(self::createTaps($line), false);
                     self::$tag = true;
                     break;
                 case preg_match('/}/', $line):
@@ -35,8 +34,7 @@ class CSSBeautifier
                     $line = self::createTaps($line);
                     break;
                 default:
-                    $line = self::createTaps($line);
-                    $line = preg_replace('/:/', ': ', $line);
+                    $line = self::checkHealthyWhiteSpaces(self::createTaps($line));
             }
 
             //$line = !preg_match('/@/', $line) ? $line = self::createTaps($line) : $line;
@@ -105,6 +103,17 @@ class CSSBeautifier
     {
         if (preg_match("/[{;}]/", $string) == false && preg_match("/:/", $string) == true) {
             $string .= ";";
+        }
+        return $string;
+    }
+
+    private static function checkHealthyWhiteSpaces(string $string, bool $checkDoublePoints = true)
+    {
+        if (!preg_match('/: /', $string) && $checkDoublePoints) {
+            $string = preg_replace('/:/', ': ', $string);
+        }
+        if (!preg_match('/ {/', $string)) {
+            $string = preg_replace('/{/', ' {', $string);
         }
         return $string;
     }

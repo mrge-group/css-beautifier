@@ -129,10 +129,10 @@ a.s24_privacy_button:hover {
     font-weight: 400;
     color: #4a4a4a
 }
-.s24_widget .s24_old_price:before,.s24_widget .s24_price:before {
+.s24_widget .s24_old_price:before, .s24_widget .s24_price:before {
     content: 'Für '
 }
-.s24_product_size_maxi .s24_product_data .s24_price.s24_hide_price,.s24_product_size_maxi .s24_product_data .s24_old_price.s24_hide_price,.s24_product_size_maxi .s24_product_data .s24_shop {
+.s24_product_size_maxi .s24_product_data .s24_price.s24_hide_price, .s24_product_size_maxi .s24_product_data .s24_old_price.s24_hide_price, .s24_product_size_maxi .s24_product_data .s24_shop {
     display: none
 }
 .s24_product_size_maxi .s24_product_data .s24_old_price {
@@ -158,7 +158,7 @@ a.s24_privacy_button:hover {
 .s24_product_size_maxi .s24_pagination_left_arrow {
     background-image: url(//widget.s24.com/images/pagination/essen-und-trinken_2017-03_links.png)
 }
-.s24_product_size_maxi .s24_pagination_right_arrow,.s24_product_size_maxi .s24_pagination_left_arrow {
+.s24_product_size_maxi .s24_pagination_right_arrow, .s24_product_size_maxi .s24_pagination_left_arrow {
     background-color: rgba(255, 255, 255, .8);
     background-position: center;
     border-radius: 0%;
@@ -171,14 +171,13 @@ a.s24_privacy_button:hover {
     -ms-transition: background-color .4s;
     transition: background-color .4s
 }
-.s24_product_size_maxi .s24_pagination_left_arrow.s24_floating_arrow,.s24_product_size_maxi .s24_pagination_right_arrow.s24_floating_arrow {
+.s24_product_size_maxi .s24_pagination_left_arrow.s24_floating_arrow, .s24_product_size_maxi .s24_pagination_right_arrow.s24_floating_arrow {
     top: 17%
 }
-.s24_modern_browser .s24_enabled.s24_pagination_right_arrow:hover,.s24_modern_browser .s24_enabled.s24_pagination_left_arrow:hover {
+.s24_modern_browser .s24_enabled.s24_pagination_right_arrow:hover, .s24_modern_browser .s24_enabled.s24_pagination_left_arrow:hover {
     background-color: #fff
 }
-.s24_product_size_maxi .s24_pagination_left_arrow.s24_disabled,
-.s24_product_size_maxi .s24_pagination_right_arrow.s24_disabled {
+.s24_product_size_maxi .s24_pagination_left_arrow.s24_disabled, .s24_product_size_maxi .s24_pagination_right_arrow.s24_disabled {
     display: none
 }
 @media all and (max-width: 400px) {
