@@ -6,34 +6,48 @@ class CSSBeautifier
 {
     const TAP = "    ";
 
-    public static function run($string)
+    private static $media = false;
+    private static $tag = false;
+    private static $repair = false;
+
+    public static function run($string, bool $repair = true)
     {
+        $start = microtime(true);
+        self::$repair = $repair;
+
         $beautifiedArray = [];
 
-        $tag = false;
-        $media = false;
         foreach (self::stringToArray($string) as $key => $line) {
             $line = trim($line);
-            if (preg_match('({)', $line)) {
-                $line = self::createTaps($line, $tag, $media);
-                if (preg_match('(@)', $line)) {
-                    $media = true;
-                } else {
-                    $tag = true;
-                }
-            } elseif (preg_match('(})', $line)) {
-                if ($tag === true) {
-                    $tag = false;
-                } else {
-                    $media = false;
-                }
-                $line = self::createTaps($line, $tag, $media);
-            } else {
-                $line = self::createTaps($line, $tag, $media);
+
+            switch (true) {
+                case preg_match('/@/', $line):
+                    $line = preg_replace('/{/', ' {', $line);
+                    self::$media = true;
+                    break;
+                case preg_match('/{/', $line):
+                    $line = self::createTaps($line);
+                    $line = preg_replace('/{/', ' {', $line);
+                    self::$tag = true;
+                    break;
+                case preg_match('/}/', $line):
+                    self::$tag ? self::$tag = false : self::$media = false;
+                    $line = self::createTaps($line);
+                    break;
+                default:
+                    $line = self::createTaps($line);
+                    $line = preg_replace('/:/', ': ', $line);
             }
-            $beautifiedArray[$key] = self::checkHealthyAttribute($line);
+
+            //$line = !preg_match('/@/', $line) ? $line = self::createTaps($line) : $line;
+            $beautifiedArray[$key] = self::$repair ? self::checkHealthyAttribute($line) : $line;
         }
-        return self::arrayToString($beautifiedArray);
+
+        $s = self::arrayToString($beautifiedArray);
+
+
+        var_dump((microtime(true) - $start) * 1000);
+        return $s;
     }
 
 
@@ -44,9 +58,9 @@ class CSSBeautifier
      *
      * @return String
      */
-    private static function random($string)
+    private static function newLines($string)
     {
-        return preg_replace("(})", "\n$0", preg_replace("([{;}])", "$0\n", $string));
+        return preg_replace("/}/", "\n$0", preg_replace("/[{;}]/", "$0\n", $string));
     }
 
     /*
@@ -59,7 +73,7 @@ class CSSBeautifier
      */
     private static function stringToArray($string)
     {
-        return explode(PHP_EOL, self::random($string));
+        return explode(PHP_EOL, self::newLines($string));
     }
 
     /*
@@ -74,7 +88,7 @@ class CSSBeautifier
     {
         $string = "";
         foreach ($array as $key => $line) {
-            if (strlen(preg_replace("( )", "", $line)) != 0) {
+            if (strlen(preg_replace("/ /", "", $line)) != 0) {
                 if ($key != 0) {
                     $string .= "\n";
                 }
@@ -89,7 +103,7 @@ class CSSBeautifier
      */
     private static function checkHealthyAttribute(string $string)
     {
-        if (preg_match("([{;}])", $string) == false && preg_match("(:)", $string) == true) {
+        if (preg_match("/[{;}]/", $string) == false && preg_match("/:/", $string) == true) {
             $string .= ";";
         }
         return $string;
@@ -98,14 +112,12 @@ class CSSBeautifier
     /*
      *
      */
-    private static function createTaps(string $string, bool $tag, bool $media)
+    private static function createTaps(string $string)
     {
-        if ($tag == true) {
-            $string = self::TAP . $string;
-        }
-        if ($media == true) {
-            $string = self::TAP . $string;
-        }
+        $string = str_replace(',', ', ', $string);
+        $string = self::$tag ? self::TAP . $string : $string;
+        $string = self::$media ? self::TAP . $string : $string;
+
         return $string;
     }
 }
