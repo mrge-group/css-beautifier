@@ -10,14 +10,13 @@ class CSSBeautifier
 
     /**
      * The run function will beautify your string, which include a CSS structure.
-     * With $repair you can switch on the mode that will add semicolons if there has to be one.
      *
      * @param $string
-     * @param bool $repair
+     * @param bool $repair - switch the mode that will add semicolons if there has to be one.
      *
      * @return string
      */
-    public static function run($string, bool $repair = true)
+    public static function run($string, $repair = true)
     {
         self::$repair = $repair;
         $taps = 0;
@@ -48,7 +47,7 @@ class CSSBeautifier
 
 
     /**
-     * This function will add "new Lines" after every "{;}".
+     * Add "new Lines" after every "{;}".
      *
      * @param String $string
      *
@@ -60,7 +59,7 @@ class CSSBeautifier
     }
 
     /**
-     * This function will convert a string to an array.
+     * Convert a string to an array.
      * Each line will be an item in the array.
      *
      * @param String $string
@@ -73,14 +72,14 @@ class CSSBeautifier
     }
 
     /**
-     * This function convert an array to a string.
+     * Convert an array to a string.
      * Each item in the array is a new line in the string.
      *
      * @param array $array
      *
      * @return string
      */
-    private static function arrayToString(array $array)
+    private static function arrayToString($array)
     {
         $string = "";
         foreach ($array as $key => $line) {
@@ -95,13 +94,13 @@ class CSSBeautifier
     }
 
     /**
-     * This function will check the ';' in the end of a line and will add one if needed.
+     * Check the ';' in the end of a line and will add one if needed.
      *
      * @param string $string
      *
      * @return string
      */
-    private static function checkHealthyAttribute(string $string)
+    private static function checkHealthyAttribute($string)
     {
         if (preg_match("/[{;}]/", $string) == false && preg_match("/:/", $string) == true) {
             $string .= ";";
@@ -110,14 +109,14 @@ class CSSBeautifier
     }
 
     /**
-     * This function will check the line for a healthy structure.
+     * Check the line for a healthy structure.
      *
      * @param string $string
      * @param bool $checkDoublePoints
      *
      * @return string
      */
-    private static function checkHealthyWhiteSpaces(string $string, bool $checkDoublePoints = true)
+    private static function checkHealthyWhiteSpaces($string, $checkDoublePoints = true)
     {
         if (preg_match('/:/', $string) && !preg_match('/: /', $string) && $checkDoublePoints) {
             $string = preg_replace('/:/', ': ', $string, 1);
@@ -133,14 +132,14 @@ class CSSBeautifier
     }
 
     /**
-     * This function will create the needed taps.
+     * Create the needed taps.
      *
      * @param string $string
      * @param int $taps
      *
      * @return string
      */
-    private static function createTaps(string $string, int $taps)
+    private static function createTaps($string, $taps)
     {
         if (!preg_match('/, /', $string)) {
             $string = str_replace(',', ', ', $string);

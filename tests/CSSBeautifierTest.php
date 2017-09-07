@@ -8,7 +8,7 @@ use Shopping24\CSSBeautifier\CSSBeautifier;
 final class CSSBeautifierTest extends TestCase
 {
     /**
-     * This test will check the correct structure of tags.
+     * Check the correct structure of tags.
      *
      * @test
      */
@@ -21,7 +21,7 @@ final class CSSBeautifierTest extends TestCase
     }
 
     /**
-     * This test will check the correct intend if @media and @supports are in the game.
+     * Check the correct intend if @media and @supports are in the game.
      *
      * @test
      */
@@ -34,7 +34,7 @@ final class CSSBeautifierTest extends TestCase
     }
 
     /**
-     * This test will check the repair of a structure with lost semicolons.
+     * Check the repair of a structure with lost semicolons.
      *
      * @test
      */
@@ -47,7 +47,7 @@ final class CSSBeautifierTest extends TestCase
     }
 
     /**
-     * This test will check that the beautifier don't break a healthy structure.
+     * Check that the beautifier don't break a healthy structure.
      *
      * @test
      */
@@ -60,7 +60,7 @@ final class CSSBeautifierTest extends TestCase
     }
 
     /**
-     * This test will beautify a complex structure.
+     * Beautify a complex structure.
      *
      * @test
      */
@@ -73,7 +73,7 @@ final class CSSBeautifierTest extends TestCase
     }
 
     /**
-     * This test will check that the beautifier don't break a complex healthy structure.
+     * Check that the beautifier don't break a complex healthy structure.
      *
      * @test
      */

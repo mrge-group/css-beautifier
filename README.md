@@ -7,7 +7,7 @@ The CSSBeautifier make your uglified CSS great again!
 
 ## Requirements:
 
-- You need at least PHP 5.3.0
+- You need at least PHP 5.4.0
 
 ## Installation:
 
