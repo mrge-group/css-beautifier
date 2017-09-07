@@ -19,5 +19,7 @@
             "Shopping24\\CSSBeautifier\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "php" : ">=5.3.0"
+    }
 }

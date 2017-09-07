@@ -8,9 +8,17 @@ class CSSBeautifier
 
     private static $repair = false;
 
+    /**
+     * The run function will beautify your string, which include a CSS structure.
+     * With $repair you can switch on the mode that will add semicolons if there has to be one.
+     *
+     * @param $string
+     * @param bool $repair
+     *
+     * @return string
+     */
     public static function run($string, bool $repair = true)
     {
-        $start = microtime(true);
         self::$repair = $repair;
         $taps = 0;
 
@@ -20,13 +28,8 @@ class CSSBeautifier
             $line = trim($line);
 
             switch (true) {
-                case preg_match('/(@supports)/', $line):
-                case preg_match('/(@media)/', $line):
-                    $line = self::checkHealthyWhiteSpaces(self::createTaps($line, $taps));
-                    $taps++;
-                    break;
                 case preg_match('/{/', $line):
-                    $line = self::checkHealthyWhiteSpaces(self::createTaps($line, $taps), false);
+                    $line = self::checkHealthyWhiteSpaces(self::createTaps($line, $taps), preg_match('/@/', $line));
                     $taps++;
                     break;
                 case preg_match('/}/', $line):
@@ -40,10 +43,7 @@ class CSSBeautifier
             $beautifiedArray[$key] = self::$repair ? self::checkHealthyAttribute($line) : $line;
         }
 
-        $s = self::arrayToString($beautifiedArray);
-
-        var_dump((microtime(true) - $start) * 1000);
-        return $s;
+        return self::arrayToString($beautifiedArray);
     }
 
 
@@ -142,7 +142,9 @@ class CSSBeautifier
      */
     private static function createTaps(string $string, int $taps)
     {
-        $string = str_replace(',', ', ', $string);
+        if (!preg_match('/, /', $string)) {
+            $string = str_replace(',', ', ', $string);
+        }
         for ($i = 0; $i < $taps; $i++) {
             $string = self::TAP . $string;
         }
