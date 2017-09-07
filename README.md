@@ -17,7 +17,7 @@ The CSSBeautifier make your uglified CSS great again!
 
 ## Usage
 
-```
+```php
     <?php
     
     use Shopping\CSSBeautifier;
