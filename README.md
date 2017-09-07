@@ -20,7 +20,7 @@ The CSSBeautifier make your uglified CSS great again!
 ```php
     <?php
     
-    use Shopping\CSSBeautifier;
+    use Shopping24\CSSBeautifier;
     
     class Foo
     {
