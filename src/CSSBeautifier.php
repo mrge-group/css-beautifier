@@ -122,7 +122,9 @@ class CSSBeautifier
             $string = preg_replace('/:/', ': ', $string, 1);
             if (preg_match('/(url\()/', $string)) {
                 preg_match('~(url\()(.*?)\)~', $string, $result);
-                $string = str_replace($result[0], preg_replace('/ /', '', $result[0]), $string);
+                if (isset($result[0])) {
+                    $string = str_replace($result[0], preg_replace('/ /', '', $result[0]), $string);
+                }
             }
         }
         if (!preg_match('/ {/', $string)) {
