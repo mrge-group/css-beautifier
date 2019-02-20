@@ -95,6 +95,7 @@ class CSSBeautifier
 
     /**
      * Check the ';' in the end of a line and will add one if needed.
+     * Wrap url option contents in double quotes.
      *
      * @param string $string
      *
@@ -102,9 +103,14 @@ class CSSBeautifier
      */
     private static function checkHealthyAttribute($string)
     {
+        // Add semicolon at the end of every option
         if (preg_match("/[{;}]/", $string) == false && preg_match("/:/", $string) == true) {
             $string .= ";";
         }
+
+        // Wrap url contents in double quotes
+        $string = preg_replace('/(?:url\()((?!\"|\').+(?<!\"|\'))(?:\))/mi', 'url("$1")', $string);
+
         return $string;
     }
 
