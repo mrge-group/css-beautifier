@@ -1,7 +1,6 @@
 {
     "name": "shopping24/css-beautifier",
     "description": "Make your CSS great again",
-    "version": "1.0.0",
     "type": "library",
     "require-dev": {
         "phpunit/phpunit": "^5.7",
