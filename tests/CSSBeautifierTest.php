@@ -67,8 +67,8 @@ final class CSSBeautifierTest extends TestCase
     public function testComplex()
     {
         self::assertEquals(
-            file_get_contents('tests/files/complexBeautified.css'),
-            CSSBeautifier::run(file_get_contents('tests/files/complexUglified.css'), false)
+            trim(file_get_contents('tests/files/complexBeautified.css')),
+            trim(CSSBeautifier::run(file_get_contents('tests/files/complexUglified.css'), false))
         );
     }
 
@@ -80,8 +80,21 @@ final class CSSBeautifierTest extends TestCase
     public function testComplexDoubleBeautified()
     {
         self::assertEquals(
-            file_get_contents('tests/files/complexBeautified.css'),
-            CSSBeautifier::run(CSSBeautifier::run(file_get_contents('tests/files/complexUglified.css'), false), false)
+            trim(file_get_contents('tests/files/complexBeautified.css')),
+            trim(CSSBeautifier::run(CSSBeautifier::run(file_get_contents('tests/files/complexUglified.css'), false), false))
+        );
+    }
+
+    /**
+     * Beautify a complex structure.
+     *
+     * @test
+     */
+    public function testComplexRepair()
+    {
+        self::assertEquals(
+            trim(file_get_contents('tests/files/complexBeautifiedRepaired.css')),
+            trim(CSSBeautifier::run(file_get_contents('tests/files/complexUglified.css')))
         );
     }
 }
