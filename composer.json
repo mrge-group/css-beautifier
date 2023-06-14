@@ -1,5 +1,5 @@
 {
-    "name": "shopping24/css-beautifier",
+    "name": "mrge-group/css-beautifier",
     "description": "Make your CSS great again",
     "type": "library",
     "require-dev": {
